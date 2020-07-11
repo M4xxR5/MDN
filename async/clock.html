@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Simple setInterval clock</title>
+    <style>
+		* {
+			background: #000;
+			color: #aaa;
+		}
+    	p {
+      		font-family: sans-serif;
+    	}
+    </style>
+  </head>
+  <body>
+    <p id="clock">00:00.000</p>
+	<button id="start">Start</button>
+	<button id="stop">Stop</button>
+    <script>
+		let startButton = document.getElementById("start");
+		const stopButton = document.getElementById("stop");
+
+		let miliseconds = 0;
+		let seconds = 0;
+		let minutes = 0;
+
+		let startTimestamp = 0;
+
+		startButton.onclick = function () {
+			this.disable = true;
+			startTimestamp = Date.now();
+			//disable the button so i cannot create new setInt
+			const start = setInterval(time, 1);
+			stopButton.onclick = function () {
+				clearInterval(start);
+			}
+			
+		};
+
+
+		function time() {
+			minutes = Math.round((Date.now() / 100000) - (startTimestamp / 100000)) % 60;
+			seconds = Math.round((Date.now() / 1000) - (startTimestamp / 1000)) % 60;
+			miliseconds = (Date.now() - startTimestamp) % 1000;
+			switch (true) {
+				case (minutes < 10):
+					minutes = '0' + minutes;
+			} 
+			switch (true) {
+				case (seconds < 10):
+					seconds = '0' + seconds;
+			}
+
+		  	switch (true) {
+				case (miliseconds < 10):
+			  		miliseconds = '00' + miliseconds;
+				case (miliseconds < 100):
+			  		miliseconds = '0' + miliseconds;
+		  	}
+		  
+			document.querySelector('#clock').textContent = `${minutes}:${seconds}.${miliseconds}`;
+      }
+
+    </script>
+  </body>
+</html>
+
