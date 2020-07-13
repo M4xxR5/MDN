@@ -14,35 +14,41 @@
     </style>
   </head>
   <body>
-    <p id="clock">00:00.000</p>
+    <p id="clock">00:00:00.000</p>
 	<button id="start">Start</button>
 	<button id="stop">Stop</button>
     <script>
 		let startButton = document.getElementById("start");
 		const stopButton = document.getElementById("stop");
 
-		let miliseconds = 0;
-		let seconds = 0;
-		let minutes = 0;
-
 		let startTimestamp = 0;
+		let start;		
+
+		//TODO start button reset the count. it must continue the count.
+		// refactor: use addEventListener() instead onclicks
 
 		startButton.onclick = function () {
-			this.disable = true;
+			startButton.disabled = true;
 			startTimestamp = Date.now();
-			//disable the button so i cannot create new setInt
-			const start = setInterval(time, 1);
-			stopButton.onclick = function () {
-				clearInterval(start);
-			}
-			
+			start = setInterval(time, 1);
 		};
 
+		stopButton.onclick = function () {
+			clearInterval(start);
+			startButton.disabled = false;
+		};
+		
 
 		function time() {
-			minutes = Math.round((Date.now() / 100000) - (startTimestamp / 100000)) % 60;
-			seconds = Math.round((Date.now() / 1000) - (startTimestamp / 1000)) % 60;
-			miliseconds = (Date.now() - startTimestamp) % 1000;
+			// hours = seconds /3600
+            // minutes = seconds % 3600) /60
+            // seconds = seconds % 60
+			let secondsElapsed = (((Date.now() - startTimestamp) / 1000));
+			
+			let hours = Math.floor((secondsElapsed / 3600) % 60);
+			let minutes = Math.floor((secondsElapsed % 3600) / 60);
+			let seconds = Math.floor(secondsElapsed % 60);
+			let miliseconds = (Date.now() - startTimestamp) % 1000;
 			switch (true) {
 				case (minutes < 10):
 					minutes = '0' + minutes;
@@ -59,7 +65,7 @@
 			  		miliseconds = '0' + miliseconds;
 		  	}
 		  
-			document.querySelector('#clock').textContent = `${minutes}:${seconds}.${miliseconds}`;
+			document.querySelector('#clock').textContent = `${hours}:${minutes}:${seconds}.${miliseconds}`;
       }
 
     </script>
