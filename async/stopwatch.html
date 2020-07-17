@@ -14,11 +14,12 @@
     </style>
   </head>
   <body>
-    <p id="clock">00:00:00.000</p>
+    <p id="stopwatch">00:00:00.000</p>
 	<button id="start">Start</button>
 	<button id="stop">Stop</button>
     <script>
-		let startButton = document.getElementById("start");
+		const stopwatch = document.getElementById("stopwatch")
+		const startButton = document.getElementById("start");
 		const stopButton = document.getElementById("stop");
 
 		let startTimestamp = 0;
@@ -26,7 +27,7 @@
 
 		//TODO start button reset the count. it must continue the count.
 		// refactor: use addEventListener() instead onclicks
-
+		// Why MDN say you should use Date and then they dont use it on its own source code? it's almost impossible create a proper pause button with Date.now()
 		startButton.onclick = function () {
 			startButton.disabled = true;
 			startTimestamp = Date.now();
@@ -65,7 +66,7 @@
 			  		miliseconds = '0' + miliseconds;
 		  	}
 		  
-			document.querySelector('#clock').textContent = `${hours}:${minutes}:${seconds}.${miliseconds}`;
+			stopwatch.textContent = `${hours}:${minutes}:${seconds}.${miliseconds}`;
       }
 
     </script>
