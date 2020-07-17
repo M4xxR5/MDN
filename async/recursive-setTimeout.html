@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<script>
+let i = 0;
+
+setTimeout(function run() {
+	console.log(i);
+	i++;
+	setTimeout(run, 1000);
+}, 1000);
+
+// Recursive setTimeout() guarantees the same delay betweeen executions
+	</script>
+</body>
+</html>

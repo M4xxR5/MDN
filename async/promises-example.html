@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	</head>
+<body>
+	<script>
+		// "promise" is a variable that stores an intermediate state between a success and a failure: a "pending state" that waits a "response".
+		fetch('coffee.jpg')
+			.then(response => {
+		// the callback inside is the "executor"
+				if (!response.ok) {
+					throw new Error(`HTTP Error! status: ${response.status}`);
+				} else {
+					return response.blob();
+				}
+			})
+			.then(myBlob => {
+				let objectURL = URL.createObjectURL(myBlob);
+				let image = document.createElement('img');
+ 				image.src = objectURL;
+				document.body.appendChild(image);
+			})
+			.catch(e => {
+				console.log('There has been a problem with your fetch operation: ' + e.message);
+			});
+	</script>
+</body>
+</html>
