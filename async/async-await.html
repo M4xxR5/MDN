@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+* {
+	background: #000;
+	color: #aaa;
+}
+	</style>
+</head>
+<body>
+	<script>
+		async function myFetch() {
+			let response = await fetch('coffee.jpg');
+
+			if (!response.ok) {
+				throw new Error(`HTTP Error! Status ${response.status}`);
+			} else {
+				let myBlob = await response.blob();
+
+				let objectURL = URL.createObjectURL(myBlob);
+				let image = document.createElement(`img`);
+				image.src = objectURL;
+				document.body.appendChild(image);
+			}
+		}
+
+myFetch()
+	.catch(e => {
+		console.log(`There has been a problem with your fetch operation: ${e.message}`);
+	});
+	</script>
+</body>
+</html>
