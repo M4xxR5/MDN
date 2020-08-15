@@ -20,14 +20,19 @@
 		a.href = `http://developer.mozilla.org`;
 		
 		const p = document.querySelector(`p`);		
-		const a2 = a.cloneNode() // does not work for now
-		p.appendChild(a2)
+		const a2 = a.cloneNode(true); // if true then make a  copy of the content and attributes of that node
+		p.appendChild(a2);
 
 		const span = document.createElement(`span`);
 		span.style.color = `#a00`
 		span.textContent = `chauchas`;
-		a.appendChild(span);
-		p.appendChild(span); // appears here cuz var is the only copy. to clone use Node.cloneNode(); instead
+		a.appendChild(span); //it doesnt appear here
+		p.appendChild(span); // it appears here cuz var is the only copy. to clone use Node.cloneNode(); instead
+		
+		const span2 = document.createElement(`span`);
+		span2.textContent = `never`;
+		a.appendChild(span2); // added and
+		a.removeChild(span2); // then removed
 	</script>
 </body>
 </html>
