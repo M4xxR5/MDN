@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+*{
+	background: #000;
+	color: #aaa;
+}
+	</style>
+</head>
+<body>
+	<p>Hellouda</p>
+	<a href=""></a>
+	<script>
+		const a = document.querySelector(`a`);
+		a.setAttribute(`target`, `_blank`);
+		a.textContent = `MDN`;
+		a.href = `http://developer.mozilla.org`;
+		
+		const p = document.querySelector(`p`);		
+		const a2 = a.cloneNode(true); // if true then make a  copy of the content and attributes of that node
+		p.appendChild(a2);
+
+		const span = document.createElement(`span`);
+		span.style.color = `#a00`
+		span.textContent = `chauchas`;
+		a.appendChild(span); //it doesnt appear here
+		p.appendChild(span); // it appears here cuz var is the only copy. to clone use Node.cloneNode(); instead
+		
+		const span2 = document.createElement(`span`);
+		span2.textContent = `never`;
+		a.appendChild(span2); // added and
+		a.removeChild(span2); // then removed
+	</script>
+</body>
+</html>
