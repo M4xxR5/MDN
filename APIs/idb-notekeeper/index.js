@@ -71,7 +71,7 @@ window.onload = function () {
 		// when everythinh is done
 
 		transaction.oncomplete = function () {
-			console.log('Transaction completed: db modification fiished.');
+			console.log('Transaction completed: db modification finished.');
 
 			//update the display of data to show the new added item
 			displayData();
@@ -145,8 +145,8 @@ window.onload = function () {
 			let noteId = Number(e.target.parentNode.getAttribute('data-note-id'));
 
 			// open a db transaction and delete the task, finding it using the id we retrieve above
-			let transaction = db.transaction(['notes_os'], readwrite);
-			let objectStore = transaction.objectStore('notes-os');
+			let transaction = db.transaction(['notes_os'], 'readwrite');
+			let objectStore = transaction.objectStore('notes_os');
 			let request = objectStore.delete(noteId);
 
 			// report that the data item has been deleted
@@ -162,6 +162,6 @@ window.onload = function () {
 					listItem.textContent = 'No notes stored.';
 					list.appendChild(listItem);
 				}
-			}
+			};
 		}
-}
+};
