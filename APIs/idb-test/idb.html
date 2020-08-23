@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+* {
+	background: #000;
+	color: #aaa;
+}
+	</style>
+</head>
+<body>
+	<script>
+		//1. Open a DB
+		let db; // Store the db here. You will use it in a few places so declare it global
+		let request = window.indexedDB.open("testDB", 1)
+		// open() returns IDBOpenDBRequest objects you can handle as events (success or error):
+		request.onerror = function(e) {
+			console.log(e)
+		};
+		request.onsuccess = function(e) {
+			console.log(e);
+			db = request.result;
+		}
+	</script>
+</body>
+</html>
